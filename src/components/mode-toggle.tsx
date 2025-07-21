@@ -1,16 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useTheme } from "next-themes";
+import useMounted from "@/components/useMounted";
 
 interface ThemeToggleProps {
   className?: string;
 }
 
 export function ModeToggle({ className }: ThemeToggleProps) {
+  const mounted = useMounted();
   const { setTheme, resolvedTheme } = useTheme();
+
+  if (!mounted) return null;
+
   const isDark = resolvedTheme === "dark";
 
   return (
