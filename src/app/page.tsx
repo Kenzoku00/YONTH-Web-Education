@@ -1,5 +1,6 @@
 import { fetchPublishedPosts, getPost, Post } from "@/lib/notion";
 import PostCard from "@/components/post-card";
+import LogoGrid from "@/components/logo-grid";
 
 async function getPosts(): Promise<Post[]> {
   const posts = await fetchPublishedPosts();
@@ -22,6 +23,8 @@ export default async function Home() {
           Discover interesting articles and insights
         </p>
       </div>
+
+      <LogoGrid/>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {posts.map((post) => (
