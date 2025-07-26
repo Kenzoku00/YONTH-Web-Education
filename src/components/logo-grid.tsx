@@ -10,11 +10,11 @@ const partners  = [
 
 export default function LogoGrid() {
   return (
-    <div className="mt-16">
+    <div className="mt-12">
       <p className="text-center text-muted-foreground text-lg mb-4 text-muted-foreground">
-        Trusted by learners from
+        Dipercaya oleh pelajar dari
       </p>
-      <div className="flex flex-wrap justify-center items-center gap-8 mb-16">
+      <div className="flex flex-wrap justify-center items-center gap-8 mb-12">
         {partners.map((partner) => (
           <Image
             key={partner.name}
