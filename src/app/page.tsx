@@ -29,9 +29,9 @@ export default async function Home() {
       <section className="flex flex-col md:flex-row items-center gap-8 my-12 max-w-5xl mx-auto px-4">
         <div className="md:w-1/2">
           <img
-            src="/guru.png"
+            src="/learn.png"
             alt="Guru Mengajar"
-            className="rounded-xl shadow-md w-auto h-50 object-cover"
+            className="rounded-xl w-auto h-50 object-cover"
           />
         </div>
         <div className="md:w-1/2">
