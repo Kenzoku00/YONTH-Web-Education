@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
+    "@mdx-js/loader": "^3.1.0",
+    "@next/mdx": "^15.5.0",
     "@notion-render/client": "^0.0.2",
     "@notionhq/client": "^3.1.3",
     "@radix-ui/react-checkbox": "^1.3.2",
@@ -40,6 +42,8 @@
     "react-syntax-highlighter": "^15.6.1",
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
     "sonner": "^2.0.5",
     "tailwind-merge": "^3.3.0",
     "zod": "^3.25.56"
