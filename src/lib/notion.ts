@@ -16,6 +16,7 @@ export interface Post {
   author?: string;
   tags?: string[];
   category?: string;
+  videoUrl?: string;
 }
 
 export async function getDatabaseStructure() {

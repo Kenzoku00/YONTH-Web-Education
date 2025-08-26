@@ -20,11 +20,76 @@ const components = {
   p: ({ children }: { children?: React.ReactNode }) => (
     <p className="mb-4">{children}</p>
   ),
-  a: ({ children, href }: { children?: React.ReactNode; href?: string }) => (
-    <a href={href} className="text-blue-500">
-      {children}
-    </a>
-  ),
+  
+  a: ({ children, href }: { children?: React.ReactNode; href?: string }) => {
+    if (!href) return <span>{children}</span>;
+
+    const embedRules = [
+      {
+        match: (url: string) =>
+          url.includes("youtube.com") || url.includes("youtu.be"),
+        render: (url: string) => {
+          const embedUrl = url
+            .replace("watch?v=", "embed/")
+            .replace("youtu.be/", "www.youtube.com/embed/");
+          return (
+            <div className="relative w-full max-w-3xl aspect-video mx-auto my-6">
+              <iframe
+                src={embedUrl}
+                className="absolute top-0 left-0 w-full h-full rounded-lg"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          );
+        },
+      },
+      {
+        match: (url: string) => url.includes("vimeo.com"),
+        render: (url: string) => {
+          const vimeoId = url.split("/").pop();
+          return (
+            <div className="relative w-full max-w-3xl aspect-video mx-auto my-6">
+              <iframe
+                src={`https://player.vimeo.com/video/${vimeoId}`}
+                className="absolute top-0 left-0 w-full h-full rounded-lg"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          );
+        },
+      },
+      {
+        match: (url: string) => url.endsWith(".mp4"),
+        render: (url: string) => (
+          <video
+            controls
+            className="w-full max-w-3xl rounded-lg mx-auto my-6"
+          >
+            <source src={url} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        ),
+      },
+    ];
+
+    for (const rule of embedRules) {
+      if (rule.match(href)) return rule.render(href);
+    }
+
+    return (
+      <a
+        href={href}
+        className="text-blue-500 underline"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {children}
+      </a>
+    );
+  },
+
   ul: ({ children }: { children?: React.ReactNode }) => (
     <ul className="mb-4 list-disc pl-5">{children}</ul>
   ),
