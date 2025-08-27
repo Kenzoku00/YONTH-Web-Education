@@ -1,11 +1,12 @@
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 import remarkVideoEmbed from "./src/lib/remark-video-embed";
+import remarkImageEmbed from "./src/lib/remark-image-embed";
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
-    remarkPlugins: [remarkVideoEmbed],
+    remarkPlugins: [remarkVideoEmbed, remarkImageEmbed],
     rehypePlugins: [],
   },
 });

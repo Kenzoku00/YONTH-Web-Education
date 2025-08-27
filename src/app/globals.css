@@ -130,6 +130,43 @@
   height: 100%;
 }
 
+.image-gallery {
+  margin: 1rem 0;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  align-items: start;
+}
+
+.image-gallery.image-gallery--1 {
+  grid-template-columns: minmax(0, 750px);
+  justify-content: center;
+}
+
+.image-gallery .image-embed {
+  margin: 0;   
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.image-gallery .image-embed img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.image-embed {
+  margin: 1rem auto;
+  max-width: min(900px, 90vw);
+}
+.image-embed img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

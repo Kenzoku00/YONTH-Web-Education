@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import ReactMarkdown from "react-markdown";
 import remarkVideoEmbed from "@/lib/remark-video-embed";
+import remarkImageEmbed from "@/lib/remark-image-embed";
 import { ResolvingMetadata } from "next";
 import { Badge } from "@/components/ui/badge";
 import { calculateReadingTime } from "@/lib/utils";
@@ -155,7 +156,7 @@ export default async function PostPage({ params }: PostPageProps) {
         <div className="max-w-none">
           <ReactMarkdown
             components={components}
-            remarkPlugins={[remarkGfm, remarkVideoEmbed]}
+            remarkPlugins={[remarkGfm, remarkVideoEmbed, remarkImageEmbed]}
             rehypePlugins={[rehypeRaw]}
           >
             {post.content}
