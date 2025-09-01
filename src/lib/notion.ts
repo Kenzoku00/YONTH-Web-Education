@@ -49,8 +49,8 @@ export async function fetchPublishedPosts() {
     },
     sorts: [
       {
-        property: "Published Date",
-        direction: "descending",
+        property: "Order",
+        direction: "ascending",
       },
     ],
   });
