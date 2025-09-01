@@ -17,6 +17,7 @@ export interface Post {
   tags?: string[];
   category?: string;
   videoUrl?: string;
+  order?: number;
 }
 
 export async function getDatabaseStructure() {
@@ -92,6 +93,7 @@ export async function getPost(pageId: string): Promise<Post | null> {
       author: properties.Author?.people[0]?.name,
       tags: properties.Tags?.multi_select?.map((tag: any) => tag.name) || [],
       category: properties.Category?.select?.name,
+      order: properties.Order?.number || 0,
     };
 
     return post;
