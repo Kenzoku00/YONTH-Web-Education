@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ReactNode } from "react";
 import { ModeToggle } from "@/components/mode-toggle";
 
@@ -13,11 +14,23 @@ export default function Layout({ children }: LayoutProps) {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex">
-              <Link
-                href="/"
-                className="flex items-center text-xl font-bold text-foreground"
-              >
-                SinbarTIK
+              <Link href="/" className="flex items-center">
+                <Image
+                  src="/Logo/Logo Black.svg"
+                  alt="SinbarTIK Logo"
+                  width={120}
+                  height={40}
+                  priority
+                  className="block dark:hidden"
+                />
+                <Image
+                  src="/Logo/Logo Grey.svg"
+                  alt="SinbarTIK Logo"
+                  width={120}
+                  height={40}
+                  priority
+                  className="hidden dark:block"
+                />
               </Link>
             </div>
             <div className="flex items-center">
