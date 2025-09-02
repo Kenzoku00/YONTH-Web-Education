@@ -67,7 +67,6 @@ export async function getPost(pageId: string): Promise<Post | null> {
     const mdBlocks = await n2m.pageToMarkdown(pageId);
     const { parent: contentString } = n2m.toMarkdownString(mdBlocks);
 
-    // Get first paragraph for description (excluding empty lines)
     const paragraphs = contentString
       .split("\n")
       .filter((line: string) => line.trim().length > 0);
@@ -76,15 +75,19 @@ export async function getPost(pageId: string): Promise<Post | null> {
       firstParagraph.slice(0, 160) + (firstParagraph.length > 160 ? "..." : "");
 
     const properties = page.properties as any;
+
+    const normalizeSlug = (title: string) =>
+      title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+
+    const title = properties.Title.title[0]?.plain_text || "Untitled";
+
     const post: Post = {
       id: page.id,
-      title: properties.Title.title[0]?.plain_text || "Untitled",
-      slug:
-        properties.Title.title[0]?.plain_text
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, "-") // Replace any non-alphanumeric chars with dash
-          .replace(/^-+|-+$/g, "") || // Remove leading/trailing dashes
-        "untitled",
+      title,
+      slug: normalizeSlug(title) || "untitled",
       coverImage: properties["Featured Image"]?.url || undefined,
       description,
       date:
@@ -99,6 +102,31 @@ export async function getPost(pageId: string): Promise<Post | null> {
     return post;
   } catch (error) {
     console.error("Error getting post:", error);
+    return null;
+  }
+}
+
+export async function getPostBySlug(slug: string): Promise<Post | null> {
+  try {
+    const posts = await fetchPublishedPosts();
+
+    const allPosts = await Promise.all(
+      posts.results.map((p: any) => getPost(p.id))
+    );
+
+    const normalizeSlug = (title: string) =>
+      title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+
+    const post = allPosts.find(
+      (p) => p && normalizeSlug(p.title) === slug
+    );
+
+    return post || null;
+  } catch (error) {
+    console.error("Error getting post by slug:", error);
     return null;
   }
 }
