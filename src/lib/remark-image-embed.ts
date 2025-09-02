@@ -1,5 +1,6 @@
 import { visit } from "unist-util-visit";
 import type { Root, Paragraph, Link, Text, Parent, Literal } from "mdast";
+import type { Node } from "unist";
 
 interface HTMLNode extends Literal {
   type: "html";
@@ -9,7 +10,7 @@ interface HTMLNode extends Literal {
 const remarkImageEmbed = () => {
   return (tree: Root) => {
 
-    visit(tree, (node) => {
+    visit(tree, (node: Node) => {
       const parent = node as Parent;
       if (!parent || !Array.isArray(parent.children)) return;
 
