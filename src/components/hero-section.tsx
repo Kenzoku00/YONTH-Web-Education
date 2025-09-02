@@ -36,7 +36,7 @@ export default function HeroSection() {
           className="w-[400px] md:w-[500px] rounded-xl object-cover"
         />
         <div className="absolute top-10 right-10 flex flex-col gap-3">
-          {["Web Development", "UI/UX", "AI", "IoT"].map((tag) => (
+          {["Computational Thinking", "Algorithm", "Data Analytics", "Artificial Intelegence"].map((tag) => (
             <span
               key={tag}
               className="px-4 py-1 rounded-full bg-background/80 shadow text-sm font-medium"
