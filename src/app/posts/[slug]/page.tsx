@@ -13,21 +13,22 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 
 interface PostPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata(
   { params }: PostPageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = await params;
   const post = await getPostBySlug(slug);
 
   if (!post) {
     return { title: "Post Not Found" };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://your-site.com";
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
   return {
     title: post.title,
@@ -67,7 +68,7 @@ export async function generateMetadata(
 }
 
 export default async function PostPage({ params }: PostPageProps) {
-  const { slug } = params;
+  const { slug } = await params;
   const post = await getPostBySlug(slug);
   const wordCount = post?.content ? getWordCount(post.content) : 0;
 
@@ -75,7 +76,8 @@ export default async function PostPage({ params }: PostPageProps) {
     notFound();
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://your-site.com";
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -93,7 +95,7 @@ export default async function PostPage({ params }: PostPageProps) {
       name: "Your Site Name",
       logo: {
         "@type": "ImageObject",
-        url: `${siteUrl}/logo.png`,
+        url: `${siteUrl}favicon-dark.png`,
       },
     },
     mainEntityOfPage: {
