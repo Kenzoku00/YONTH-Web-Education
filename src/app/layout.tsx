@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Layout from "@/components/layout";
 import { ThemeProvider } from "@/components/theme-provider";
+import ManifestSwitcher from "@/components/ManifestSwitcher";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,12 +12,12 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://your-site.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "SinbarTIK  - Web Education",
+    default: "SinbarTIK - Web Education",
     template: `%s | SinbarTIK`,
   },
   description: "Website Build For Education",
   openGraph: {
-    title: "SinbarTIK  - Web Education",
+    title: "SinbarTIK - Web Education",
     description: "Website Build For Education",
     url: siteUrl,
     siteName: "SinbarTIK",
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
         url: `${siteUrl}/opengraph-image.png`,
         width: 1200,
         height: 630,
-        alt: "SinbarTIK  - Web Education",
+        alt: "SinbarTIK - Web Education",
       },
     ],
     locale: "en_US",
@@ -33,20 +34,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SinbarTIK  - Web Education",
+    title: "SinbarTIK - Web Education",
     description: "Website Build For Education",
     images: [`${siteUrl}/opengraph-image.png`],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
   },
   icons: {
     icon: [
@@ -55,7 +49,7 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-touch-icon.png",
   },
-  manifest: `${siteUrl}/site.webmanifest`,
+  manifest: "/site-light.webmanifest",
 };
 
 export const viewport: Viewport = {
@@ -65,11 +59,7 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
@@ -79,6 +69,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <ManifestSwitcher />
           <Layout>{children}</Layout>
         </ThemeProvider>
       </body>
