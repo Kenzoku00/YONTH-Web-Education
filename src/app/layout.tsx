@@ -47,7 +47,6 @@ export const metadata: Metadata = {
       { url: "/favicon-dark.png", media: "(prefers-color-scheme: light)" },
       { url: "/favicon-grey.png", media: "(prefers-color-scheme: dark)" },
     ],
-    apple: "/apple-touch-icon.png",
   },
   manifest: "/site-light.webmanifest",
 };
